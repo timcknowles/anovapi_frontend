@@ -22,7 +22,7 @@ __END__
   %head
     %title AJAX example
     %script{:type => "text/javascript", :src => "http://code.jquery.com/jquery-2.1.0.min.js"}
-    %script{:type => "text/javascript", :src => ".js/jquery.ajax-cross-origin.min.js"}
+    
   %body
   #message
   =yield
@@ -35,10 +35,9 @@ __END__
 		$("#start").click(function() { 
 
 			$.ajax({
-			  crossOrigin: true,
 			  type: 'post',
-			  url: 'http://8567a3b9.ngrok.io/start',
-			  dataType: 'jsonp',
+			  url: 'http://192.168.0.13:5000/start',
+			  dataType: 'json',
 			  success: function(data) {
 			     $("#message").html(data);
 			  }
@@ -48,10 +47,9 @@ __END__
 		$("#stop").click(function() { 
 
 			$.ajax({
-			  crossOrigin: true,
-			  type: 'get',
-			  url: 'http://8567a3b9.ngrok.io/stop',
-			  dataType: 'jsonp',
+			  type: 'post',
+			  url: 'http://192.168.0.13:5000/stop',
+			  dataType: 'json',
 			  success: function(data) {
 			     $("#message").html(data);
 			  }
@@ -61,10 +59,11 @@ __END__
 		$("#settemp").click(function() { 
 
 			$.ajax({
-			  crossOrigin: true,
 			  type: 'post',
-			  url: 'http://8567a3b9.ngrok.io/temp',
-			  dataType: 'jsonp',
+			  contentType: 'application/json',
+			  url: 'http://192.168.0.13:5000/temp',
+			  data: JSON. stringify ({"temp":"50"}),
+			  dataType: 'json',
 			  success: function(data) {
 			     $("#message").html(data);
 			  }
