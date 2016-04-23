@@ -2,76 +2,82 @@ require 'sinatra'
 require 'haml'
 
 get "/" do
-	haml :root 
-end  
+  haml :root
+end
 
 get "/start" do
-	haml :start
-end  
+  haml :start
+end
 
-get "/stop" do 
-	haml :stop
+get "/stop" do
+  haml :stop
 end
 
 __END__
 
-@@layout 
+@@layout
 
 !!!
 %html
   %head
     %title AJAX example
     %script{:type => "text/javascript", :src => "http://code.jquery.com/jquery-2.1.0.min.js"}
-    
-  %body
-  #message
-  =yield
-    
+
+  %body{style: "font-family: Arial"}
+    %h2 Status:
+    %textarea#message{style: "padding:10px;width:500px;height:100px"}
+
+    %div
+      =yield
+
 
 
 @@root
-:javascript 
-	$(document).ready(function() { 
-		$("#start").click(function() { 
+:javascript
+  $(document).ready(function() {
+    $("#start").click(function() {
 
-			$.ajax({
-			  type: 'post',
-			  url: 'http://192.168.0.13:5000/start',
-			  dataType: 'json',
-			  success: function(data) {
-			     $("#message").html(data);
-			  }
-	        });
-		});
+      $.ajax({
+        type: 'post',
+        url: 'http://bb1c1ed4.ngrok.io/start',
+        dataType: 'json',
+        complete: function(data) {
+           $("#message").val(data.responseText);
+        }
+          });
+    });
 
-		$("#stop").click(function() { 
+    $("#stop").click(function() {
 
-			$.ajax({
-			  type: 'post',
-			  url: 'http://192.168.0.13:5000/stop',
-			  dataType: 'json',
-			  success: function(data) {
-			     $("#message").html(data);
-			  }
-	        });
-		});
-		
-		$("#settemp").click(function() { 
+      $.ajax({
+        type: 'post',
+        url: 'http://bb1c1ed4.ngrok.io/stop',
+        dataType: 'json',
+        complete: function(data) {
+           $("#message").val(data.responseText);
+        }
+      });
+    });
 
-			$.ajax({
-			  type: 'post',
-			  contentType: 'application/json',
-			  url: 'http://192.168.0.13:5000/temp',
-			  data: JSON. stringify ({"temp":"50"}),
-			  dataType: 'json',
-			  success: function(data) {
-			     $("#message").html(data);
-			  }
-	        });
-		});
-	});
-%button#start Start 
+    $("#settemp").click(function() {
+
+      $.ajax({
+        type: 'post',
+        contentType: 'application/json',
+        url: 'http://bb1c1ed4.ngrok.io/temp',
+        data: JSON.stringify ({"temp":$('#temp').val()}),
+        dataType: 'json',
+        complete: function(data) {
+           $("#message").val(data.responseText);
+        }
+      });
+    });
+  });
+
+%h2 Controls:
+%button#start Start
 %button#stop Stop
+%input#temp{type: "number", min: "0", max: "150", value: 30}
 %button#settemp Temp
 
 @@start
