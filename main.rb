@@ -21,7 +21,7 @@ __END__
 %html
   %head
     %title AJAX example
-    %script{:type => "text/javascript", :src => "http://code.jquery.com/jquery-2.1.0.min.js"}
+    %script{:type => "text/javascript", :src => "https://code.jquery.com/jquery-2.1.0.min.js"}
 
   %body{style: "font-family: Arial"}
     %h2 Status:
