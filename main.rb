@@ -39,7 +39,7 @@ __END__
 
       $.ajax({
         type: 'post',
-        url: 'http://6bae7d7c.ngrok.io/start',
+        url: 'https://6bae7d7c.ngrok.io/start',
         dataType: 'json',
         complete: function(data) {
            $("#message").val(data.responseText);
@@ -51,7 +51,7 @@ __END__
 
       $.ajax({
         type: 'post',
-        url: 'http://6bae7d7c.ngrok.io/stop',
+        url: 'https://6bae7d7c.ngrok.io/stop',
         dataType: 'json',
         complete: function(data) {
            $("#message").val(data.responseText);
@@ -64,7 +64,7 @@ __END__
       $.ajax({
         type: 'post',
         contentType: 'application/json',
-        url: 'http://6bae7d7c.ngrok.io/temp',
+        url: 'https://6bae7d7c.ngrok.io/temp',
         data: JSON.stringify ({"temp":$('#temp').val()}),
         dataType: 'json',
         complete: function(data) {
