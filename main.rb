@@ -79,7 +79,7 @@ __END__
         type: 'post',
         contentType: 'application/json',
         url: 'https://252a7d04.ngrok.io/set-timer',
-        data: {"minutes":$('#minutes').val()},
+        data: JSON.stringify ({"minutes":$('#minutes').val()}),
         dataType: 'json',
         complete: function(data) {
            $("#message").val(data.responseText);
