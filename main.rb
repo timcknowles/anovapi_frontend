@@ -72,6 +72,44 @@ __END__
         }
       });
     });
+
+    $("#settimer").click(function() {
+
+      $.ajax({
+        type: 'post',
+        contentType: 'application/json',
+        url: 'https://252a7d04.ngrok.io/set-timer',
+        data: JSON.stringify ({"minutes":$('#minutes').val()}),
+        dataType: 'json',
+        complete: function(data) {
+           $("#message").val(data.responseText);
+        }
+      });
+    });
+
+    $("#start-timer").click(function() {
+
+      $.ajax({
+        type: 'post',
+        url: 'https://252a7d04.ngrok.io/start-timer',
+        dataType: 'json',
+        complete: function(data) {
+           $("#message").val(data.responseText);
+        }
+          });
+    });
+
+    $("#stop-timer").click(function() {
+
+      $.ajax({
+        type: 'post',
+        url: 'https://252a7d04.ngrok.io/stop-timer',
+        dataType: 'json',
+        complete: function(data) {
+           $("#message").val(data.responseText);
+        }
+      });
+    });
   });
 
 %h2 Controls:
@@ -79,7 +117,10 @@ __END__
 %button#stop Stop
 %input#temp{type: "number", min: "0", max: "150", value: 30}
 %button#settemp Temp
-
+%input#minutes{type: "number", min: "0", max: "5000", value: 30}
+%button#settime Time
+%button#start-timer Start_Timer
+%button#stop-timer Stop_Timer
 @@start
 It has started
 
