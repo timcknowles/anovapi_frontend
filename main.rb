@@ -73,7 +73,7 @@ __END__
       });
     });
 
-    $("#settimer").click(function() {
+    $("#set-timer").click(function() {
 
       $.ajax({
         type: 'post',
@@ -118,9 +118,9 @@ __END__
 %input#temp{type: "number", min: "0", max: "150", value: 30}
 %button#settemp Temp
 %input#minutes{type: "number", min: "0", max: "5000", value: 30}
-%button#settime Time
-%button#start-timer Start_Timer
-%button#stop-timer Stop_Timer
+%button#set-timer Time (mins)
+%button#start-timer Start Timer
+%button#stop-timer Stop Timer
 @@start
 It has started
 
